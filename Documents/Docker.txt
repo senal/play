@@ -5,3 +5,8 @@ docker run -d --rm --name mongo -p 27017:27017 -v mongodbdata:/data/db mongo
 dotnet pack -o <path where the package folder needs to be create>\packages
 
 dotnet nuget add source C:\workspace\learning\microservices\julio\packages -n PlayEconomy
+
+
+# runnings docker compose without spitting output
+
+docker-compose up -d (run docker compose in detach mode to stop verbose)
