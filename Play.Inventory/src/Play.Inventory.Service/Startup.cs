@@ -63,7 +63,7 @@ namespace Play.Inventory.Service
                 onReset: () => {
                     var serviceProvider = services.BuildServiceProvider();
                     serviceProvider.GetService<ILogger<CatalogClient>>()?
-                    .LogWarning($"Closding the circute ...");
+                    .LogWarning($"Closing the circute ...");
                 }
             ))
             .AddPolicyHandler(Policy.TimeoutAsync<HttpResponseMessage>(1));
