@@ -50,3 +50,11 @@ C:\workspace\learning\microservices\julio\Play.Inventory\src\Play.Inventory.Serv
 C:\workspace\learning\microservices\julio\Play.Inventory\src\Play.Inventory.Service\obj\Debug\net5.0\Play.Inventory.Service.pdb
 C:\workspace\learning\microservices\julio\Play.Inventory\src\Play.Inventory.Service\obj\Debug\net5.0\Play.Inventory.Service.genruntimeconfig.cache
 C:\workspace\learning\microservices\julio\Play.Inventory\src\Play.Inventory.Service\obj\Debug\net5.0\ref\Play.Inventory.Service.dll
+C:\workspace\learning\microservices\julio\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net5.0\Microsoft.Extensions.Http.dll
+C:\workspace\learning\microservices\julio\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net5.0\Microsoft.Extensions.Http.Polly.dll
+C:\workspace\learning\microservices\julio\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net5.0\Microsoft.Extensions.Logging.dll
+C:\workspace\learning\microservices\julio\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net5.0\Microsoft.Extensions.Logging.Abstractions.dll
+C:\workspace\learning\microservices\julio\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net5.0\Microsoft.Extensions.Options.dll
+C:\workspace\learning\microservices\julio\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net5.0\Polly.dll
+C:\workspace\learning\microservices\julio\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net5.0\Polly.Extensions.Http.dll
+C:\workspace\learning\microservices\julio\Play.Inventory\src\Play.Inventory.Service\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
