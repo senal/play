@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using MassTransit;
 using Microsoft.AspNetCore.Mvc;
+using Play.Catalog.Contracts;
 using Play.Catalog.Service.Dtos;
 using Play.Catalog.Service.Entities;
 using Play.Common;
@@ -45,6 +46,7 @@ namespace Play.Catalog.Service.Controllers {
                 CreatedDate = DateTimeOffset.UtcNow
             };
             await _itemsRepository.CreateAsync (item);
+            await _publishEndpoint.Publish (new CatalogItemCreated (item.Id, item.Name, item.Description));
             return CreatedAtAction (nameof (GetByIdAsync), new { id = item.Id }, item);
         }
 
@@ -60,7 +62,7 @@ namespace Play.Catalog.Service.Controllers {
             item.Price = updateItemDto.Price;
 
             await _itemsRepository.UpdateAsync (item);
-
+            await _publishEndpoint.Publish (new CatalogItemUpdated (item.Id, item.Name, item.Description));
             return NoContent ( );
         }
 
@@ -73,6 +75,7 @@ namespace Play.Catalog.Service.Controllers {
             }
 
             await _itemsRepository.DeleteAsync (id);
+            await _publishEndpoint.Publish (new CatalogItemDeleted (id));
             return NoContent ( );
         }
     }
