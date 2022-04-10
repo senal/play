@@ -1,0 +1,11 @@
+dotnet tool install -g dotnet-aspnet-codegenerator --version 5.0.2
+
+Adding dotnet-aspnet-codegenerator support nuget packages
+
+dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 5.0.2
+dotnet add package Microsoft.AspNetCore.Identity.UI --version 5.0.15
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 5.0.15
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 5.0.15
+
+
+ 
