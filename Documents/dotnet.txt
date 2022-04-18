@@ -7,5 +7,22 @@ dotnet add package Microsoft.AspNetCore.Identity.UI --version 5.0.15
 dotnet add package Microsoft.EntityFrameworkCore.Design --version 5.0.15
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 5.0.15
 
+Extract only the files needed for the identity
+dotnet aspnet-codegenerator identity --files "Account.Register"
 
-Integrate Identity with MongoDB
+----Integrate Identity with MongoDB---
+dotnet add package AspNetCore.Identity.MongoDbCore
+
+Startup configuration
+
+BsonSerializer.RegisterSerializer (new GuidSerializer (MongoDB.Bson.BsonType.String));
+            var serviceSettings = Configuration.GetSection (nameof (ServiceSettings)).Get<ServiceSettings> ( );
+            var mongoDbSettings = Configuration.GetSection (nameof (MongoDbSettings)).Get<MongoDbSettings> ( );
+
+            services.AddDefaultIdentity<ApplicationUser> ( )
+                .AddRoles<ApplicationRole> ( )
+                .AddMongoDbStores<ApplicationUser, ApplicationRole, Guid>
+                (
+                    connectionString: mongoDbSettings.ConnectionString,
+                    serviceSettings.ServiceName
+                );
