@@ -6,3 +6,25 @@ dotnet add package IdentityServer4.AspNetIdentity
 
 Id server configuration end point
 {baseUrl}/.well-known/openid-configuration
+
+
+User registration page
+https://localhost:5003/Identity/Account/register
+
+semira@fake.com
+1982Rs~
+
+
+Request Auth token from IdentityServer using Postman
+
+New Get request 
+Authorizaton Tab
+	Type: OAuth2.0
+	Configuration Options
+	--------------------------
+	Grant Type: Authorizaton Code (With PKCE)
+	CallBackURL: urn:ietf:wg:oauth:2.0:oob
+	AuthUrl: https://localhost:5003/connect/authorize
+	AccessTokenURL: https://localhost:5003/connect/token
+	ClientId: postman
+	Scope: openid
