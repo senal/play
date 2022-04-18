@@ -1,0 +1,8 @@
+---- ID server related Nuget packages -----
+
+dotnet add package IdentityServer4
+dotnet add package IdentityServer4.AspNetIdentity
+
+
+Id server configuration end point
+{baseUrl}/.well-known/openid-configuration

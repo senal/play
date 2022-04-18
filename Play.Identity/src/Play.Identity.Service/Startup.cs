@@ -9,6 +9,7 @@ using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
 using Play.Common.Settings;
 using Play.Identity.Service.Entities;
+using Play.Identity.Service.Settings;
 
 namespace Play.Identity.Service {
     public class Startup {
@@ -24,6 +25,7 @@ namespace Play.Identity.Service {
             BsonSerializer.RegisterSerializer (new GuidSerializer (MongoDB.Bson.BsonType.String));
             var serviceSettings = Configuration.GetSection (nameof (ServiceSettings)).Get<ServiceSettings> ( );
             var mongoDbSettings = Configuration.GetSection (nameof (MongoDbSettings)).Get<MongoDbSettings> ( );
+            IdentityServerSettings identityServerSettings = new ( );
 
             services.AddDefaultIdentity<ApplicationUser> ( )
                 .AddRoles<ApplicationRole> ( )
@@ -32,6 +34,13 @@ namespace Play.Identity.Service {
                     connectionString: mongoDbSettings.ConnectionString,
                     serviceSettings.ServiceName
                 );
+            // Identity server configurations
+            services.AddIdentityServer ( )
+                .AddAspNetIdentity<ApplicationUser> ( ) // Integrate Identity server with ASPIdentity
+                .AddInMemoryApiScopes (identityServerSettings.ApiScopes)
+                .AddInMemoryClients (identityServerSettings.Clients)
+                .AddInMemoryIdentityResources (identityServerSettings.IdentityResources)
+                .AddDeveloperSigningCredential ( ); // This is only in Dev enviroment, in production we must use a valid certificate to sign tokens
 
             services.AddControllers ( );
             services.AddSwaggerGen (c => {
@@ -51,7 +60,7 @@ namespace Play.Identity.Service {
             app.UseStaticFiles ( );
 
             app.UseRouting ( );
-
+            app.UseIdentityServer ( );
             app.UseAuthorization ( );
 
             app.UseEndpoints (endpoints => {
