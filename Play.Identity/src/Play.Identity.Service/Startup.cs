@@ -43,6 +43,7 @@ namespace Play.Identity.Service {
                 .AddAspNetIdentity<ApplicationUser> ( ) // Integrate Identity server with ASPIdentity
                 .AddInMemoryApiScopes (identityServerSettings.ApiScopes)
                 .AddInMemoryClients (identityServerSettings.Clients)
+                .AddInMemoryApiResources (identityServerSettings.ApiResources)
                 .AddInMemoryIdentityResources (identityServerSettings.IdentityResources)
                 .AddDeveloperSigningCredential ( ); // This is only in Dev enviroment, in production we must use a valid certificate to sign tokens
 

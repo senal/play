@@ -1,5 +1,6 @@
 using MassTransit;
 using MassTransit.Definition;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -29,6 +30,11 @@ namespace Play.Catalog.Service {
                 .AddMongoRepository<Item> ("items")
                 .AddMassTransitWithRabbitMq ( );
 
+            services.AddAuthentication (JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer (options => {
+                    options.Authority = "https://localhost:5003";
+                    options.Audience = serviceSettings.ServiceName;
+                });
             services.AddControllers (options => {
                 options.SuppressAsyncSuffixInActionNames = false;
             });
@@ -53,7 +59,7 @@ namespace Play.Catalog.Service {
             app.UseHttpsRedirection ( );
 
             app.UseRouting ( );
-
+            app.UseAuthentication ( );
             app.UseAuthorization ( );
 
             app.UseEndpoints (endpoints => {
