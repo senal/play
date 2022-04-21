@@ -8,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Play.Catalog.Service.Entities;
+using Play.Common.Identity;
 using Play.Common.MassTransit;
 using Play.Common.MongoDB;
 using Play.Common.Settings;
@@ -25,16 +26,14 @@ namespace Play.Catalog.Service {
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices (IServiceCollection services) {
+
             serviceSettings = Configuration.GetSection (nameof (ServiceSettings)).Get<ServiceSettings> ( );
+
             services.AddMongo ( )
                 .AddMongoRepository<Item> ("items")
-                .AddMassTransitWithRabbitMq ( );
+                .AddMassTransitWithRabbitMq ( )
+                .AddJwtBearerAuthentication ( );
 
-            services.AddAuthentication (JwtBearerDefaults.AuthenticationScheme)
-                .AddJwtBearer (options => {
-                    options.Authority = "https://localhost:5003";
-                    options.Audience = serviceSettings.ServiceName;
-                });
             services.AddControllers (options => {
                 options.SuppressAsyncSuffixInActionNames = false;
             });
