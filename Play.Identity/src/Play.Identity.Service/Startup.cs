@@ -47,6 +47,7 @@ namespace Play.Identity.Service {
                 .AddInMemoryIdentityResources (identityServerSettings.IdentityResources)
                 .AddDeveloperSigningCredential ( ); // This is only in Dev enviroment, in production we must use a valid certificate to sign tokens
 
+            services.AddLocalApiAuthentication ( ); // Protecting Identity server controls
             services.AddControllers ( );
             services.AddSwaggerGen (c => {
                 c.SwaggerDoc ("v1", new OpenApiInfo { Title = "Play.Identity.Service", Version = "v1" });
