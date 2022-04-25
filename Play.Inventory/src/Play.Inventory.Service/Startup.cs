@@ -32,7 +32,7 @@ namespace Play.Inventory.Service {
         public void ConfigureServices (IServiceCollection services) {
             serviceSettings = Configuration.GetSection (nameof (ServiceSettings)).Get<ServiceSettings> ( );
             services.AddMongo ( )
-                .AddMongoRepository<InventoryItem> ("inventoryIems")
+                .AddMongoRepository<InventoryItem> ("inventoryItems")
                 .AddMongoRepository<CatalogItem> ("catalogItems")
                 .AddMassTransitWithRabbitMq ( )
                 .AddJwtBearerAuthentication ( );
