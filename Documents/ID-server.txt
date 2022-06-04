@@ -28,3 +28,17 @@ Authorizaton Tab
 	AccessTokenURL: https://localhost:5003/connect/token
 	ClientId: postman
 	Scope: openid
+	
+
+
+Ad following nuget package(s) to add logout page again to the ID server project ( this is for .net 5) [This is how we add pages when we missed them at the first time]
+dotnet add package Microsoft.EntityFrameworkCore.Design --version 5.0.17
+dotnet add package Microsoft.EntityFrameworkCore.SqlServer --version 5.0.17
+dotnet aspnet-codegenerator identity --files "Account.Logout"
+
+- delete data folder, IdentityHostingStartup page
+
+Remove following nuget packages from the project file: (Just delete them from the cproj file)
+
+Microsoft.EntityFrameworkCore.Design
+Microsoft.EntityFrameworkCore.SqlServer
