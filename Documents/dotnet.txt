@@ -26,3 +26,8 @@ BsonSerializer.RegisterSerializer (new GuidSerializer (MongoDB.Bson.BsonType.Str
                     connectionString: mongoDbSettings.ConnectionString,
                     serviceSettings.ServiceName
                 );
+
+
+dotnet pack -p:PackageVersion:<new version> -o <package location>
+
+-----------------------------------------------------------------------------
