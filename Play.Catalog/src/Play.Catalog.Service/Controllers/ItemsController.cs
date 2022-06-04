@@ -53,7 +53,11 @@ namespace Play.Catalog.Service.Controllers {
                 CreatedDate = DateTimeOffset.UtcNow
             };
             await _itemsRepository.CreateAsync (item);
-            await _publishEndpoint.Publish (new CatalogItemCreated (item.Id, item.Name, item.Description));
+            await _publishEndpoint.Publish (new CatalogItemCreated (
+                item.Id, 
+                item.Name, 
+                item.Description,
+                item.Price));
             return CreatedAtAction (nameof (GetByIdAsync), new { id = item.Id }, item);
         }
 
@@ -70,7 +74,11 @@ namespace Play.Catalog.Service.Controllers {
             item.Price = updateItemDto.Price;
 
             await _itemsRepository.UpdateAsync (item);
-            await _publishEndpoint.Publish (new CatalogItemUpdated (item.Id, item.Name, item.Description));
+            await _publishEndpoint.Publish (new CatalogItemUpdated (
+                item.Id, 
+                item.Name, 
+                item.Description,
+                item.Price));
             return NoContent ( );
         }
 
