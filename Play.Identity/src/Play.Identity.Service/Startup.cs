@@ -1,4 +1,5 @@
 using System;
+using GreenPipes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -7,8 +8,10 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using MongoDB.Bson.Serialization;
 using MongoDB.Bson.Serialization.Serializers;
+using Play.Common.MassTransit;
 using Play.Common.Settings;
 using Play.Identity.Service.Entities;
+using Play.Identity.Service.Exceptions;
 using Play.Identity.Service.HostedServices;
 using Play.Identity.Service.Settings;
 
@@ -51,7 +54,11 @@ namespace Play.Identity.Service {
                 .AddInMemoryApiResources (identityServerSettings.ApiResources)
                 .AddInMemoryIdentityResources (identityServerSettings.IdentityResources)
                 .AddDeveloperSigningCredential ( ); // This is only in Dev enviroment, in production we must use a valid certificate to sign tokens
-
+            services.AddMassTransitWithRabbitMq(retryConfigurator => {
+                retryConfigurator.Interval(3, TimeSpan.FromSeconds(5));
+                retryConfigurator.Ignore(typeof(UnknownUserException));
+                retryConfigurator.Ignore(typeof(InsufficientFundsException));
+            });
             services.AddLocalApiAuthentication ( ); // Protecting Identity server controls
             services.AddControllers ( );
             services.AddHostedService<IdentitySeedHostedService> ( );
